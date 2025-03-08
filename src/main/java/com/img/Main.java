@@ -33,6 +33,16 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        if (origin == null || add == null) {
+            System.out.println("文件内容为空");
+            return;
+        }
+
+        if (origin.isEmpty() || add.isEmpty()) {
+            System.out.println("文件内容为空");
+            return;
+        }
+
         Map<String, Float> originWordFreq = getWordFreq(origin);
         Map<String, Float> addWordFreq = getWordFreq(add);
 

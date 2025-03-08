@@ -19,8 +19,6 @@ public class Segment {
     static {
         try {
             // 导入词典
-//            String dictPath = Segment.class.getClassLoader().getResource("dict.txt").toString();
-//            System.out.println(dictPath);
             root = importDict(Segment.class.getClassLoader().getResourceAsStream("dict.txt"));
         } catch (IOException e) {
             System.out.println("导入词典失败");
