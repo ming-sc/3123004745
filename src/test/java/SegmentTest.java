@@ -2,6 +2,7 @@ import com.img.*;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -21,9 +22,9 @@ public class SegmentTest {
 
     @Test
     public void importDictTest() {
-        String dictPath = "src/main/resources/dict.txt";
+        InputStream inputStream = Segment.class.getClassLoader().getResourceAsStream("dict.txt");
         try {
-            Segment.importDict(dictPath);
+            Segment.importDict(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,8 +1,6 @@
 package com.img;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +19,9 @@ public class Segment {
     static {
         try {
             // 导入词典
-            String dictPath = "src/main/resources/dict.txt";
-            root = importDict(dictPath);
+//            String dictPath = Segment.class.getClassLoader().getResource("dict.txt").toString();
+//            System.out.println(dictPath);
+            root = importDict(Segment.class.getClassLoader().getResourceAsStream("dict.txt"));
         } catch (IOException e) {
             System.out.println("导入词典失败");
         }
@@ -141,12 +140,12 @@ public class Segment {
 
     /**
      * 导入词典
-     * @param dictPath 词典路径
+     * @param dict 词典文件
      * @return 前缀树根节点
      * @throws IOException 读取文件异常
      */
-    public static PrefixTreeNode<CharacterInfo> importDict(String dictPath) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(dictPath));
+    public static PrefixTreeNode<CharacterInfo> importDict(InputStream dict) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(dict));
         String line = null;
         PrefixTreeNode<CharacterInfo> root = new PrefixTreeNode<>();
         totalFrequency = 0;
