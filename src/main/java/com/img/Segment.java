@@ -10,6 +10,7 @@ import java.util.List;
  * @author : IMG
  * @create  : 2025/3/8
  */
+@SuppressWarnings("unused")
 public class Segment {
     /**
      * 前缀树根节点
@@ -23,7 +24,7 @@ public class Segment {
             String dictPath = "src/main/resources/dict.txt";
             root = importDict(dictPath);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("导入词典失败");
         }
     }
 
@@ -60,15 +61,14 @@ public class Segment {
             String word = str.substring(x, y);
             if (word.length() == 1 && isEnglish(word.charAt(0))) {
                 buffer += word;
-                x = y;
             } else {
                 if (!buffer.isEmpty()) {
                     segments.add(buffer);
                     buffer = "";
                 }
                 segments.add(word);
-                x = y;
             }
+            x = y;
         }
         if (!buffer.isEmpty()) {
             segments.add(buffer);

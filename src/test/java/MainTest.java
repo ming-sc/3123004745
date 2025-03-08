@@ -50,8 +50,6 @@ public class MainTest {
 
     @Test
     public void cosineSimilarityTest() throws IOException {
-//        String origin = "一位真正的作家永远只为内心写作，只有内心才会真实地告诉他，他的自私、他的高尚是多么突出。";
-//        String add = "一位真正丽的作家永远医只为内心写腥作，只怖有惠内陆心才会真实地告诉他，他的自辟私、他船的高尚是多迪么突出。";
         String origin = Main.readFile("src/main/resources/origin.txt");
         String add = Main.readFile("src/main/resources/add.txt");
         Map<String, Float> originWordFreq = Main.getWordFreq(origin);

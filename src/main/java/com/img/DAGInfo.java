@@ -4,6 +4,7 @@ package com.img;
  * @author : IMG
  * @create : 2025/3/8
  */
+@SuppressWarnings("unused")
 public class DAGInfo {
     private int from;
     private int to;

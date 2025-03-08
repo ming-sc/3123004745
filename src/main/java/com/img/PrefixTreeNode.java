@@ -6,6 +6,7 @@ import java.util.TreeMap;
  * @author : IMG
  * @create : 2025/3/8
  */
+@SuppressWarnings("unused")
 public class PrefixTreeNode<T> {
     private T data;
     private TreeMap<Character, PrefixTreeNode<T>> next;

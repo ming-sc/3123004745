@@ -19,6 +19,10 @@ public class Main {
         String addPath = args[1];
         String resultPath = args[2];
 
+        System.out.println("原文件: " + originPath);
+        System.out.println("抄袭文件: " + addPath);
+        System.out.println("结果文件: " + resultPath);
+
         String origin;
         String add;
         try {
@@ -31,13 +35,18 @@ public class Main {
 
         Map<String, Float> originWordFreq = getWordFreq(origin);
         Map<String, Float> addWordFreq = getWordFreq(add);
+
         float cosineSimilarity = cosineSimilarity(originWordFreq, addWordFreq);
-        System.out.println(cosineSimilarity);
-
         float jaccardSimilarity = jaccardSimilarity(originWordFreq, addWordFreq);
-        System.out.println(jaccardSimilarity);
+        double result = 0.5 * cosineSimilarity + 0.5 * jaccardSimilarity;
 
-        System.out.println(0.5 * cosineSimilarity + 0.5 * jaccardSimilarity);
+        System.out.format("%.2f\n", result);
+        try {
+            writeFile(resultPath, String.format("%.2f", result));
+            System.out.println("结果保存成功");
+        } catch (IOException e) {
+            System.out.println("无法保存结果");
+        }
     }
 
     /**
@@ -82,7 +91,6 @@ public class Main {
             String key = entry.getKey();
             float value = entry.getValue();
             if (addWordFreq.containsKey(key)) {
-                System.out.println(key);
                 Float value2 = addWordFreq.get(key);
                 denominator1 += value * value;
                 numerator += value * value2;
@@ -142,5 +150,11 @@ public class Main {
         }
         reader.close();
         return result.toString();
+    }
+
+    public static void writeFile(String resultPath, String result) throws IOException {
+        FileWriter writer = new FileWriter(resultPath);
+        writer.write(result);
+        writer.close();
     }
 }
